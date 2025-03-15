@@ -1,0 +1,12 @@
+import numpy as np
+
+def getBondDuration(y, face, couponRate, m, ppy=1):
+    C = (couponRate * face) / ppy  
+    t = np.arange(1, m * ppy + 1)
+    discount_factors = np.power(1 + y / ppy, -t)
+    coupon_pv = C * discount_factors
+    face_pv = face * np.power(1 + y / ppy, -m * ppy)
+    numerator = np.sum(t * coupon_pv) + (m * ppy * face_pv)
+    denominator = np.sum(coupon_pv) + face_pv
+   
+return numerator / denominator
