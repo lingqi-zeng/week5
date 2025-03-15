@@ -1,0 +1,10 @@
+import numpy as np
+
+def getBondPrice(y, face, couponRate, m, ppy=1):
+
+    C = (couponRate * face) / ppy  
+    t = np.arange(1, m * ppy + 1)
+    discount_factors = np.power(1 + y / ppy, -t)
+    coupon_pv = C * np.sum(discount_factors)
+    face_pv = face * np.power(1 + y / ppy, -m * ppy)
+    return coupon_pv + face_pv
